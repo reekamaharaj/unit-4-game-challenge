@@ -13965,6 +13965,11 @@ video {
   transition-duration: 1000ms;
 }
 
+body{
+  font-family: 'Press Start 2P', cursive;
+  font-family: 'Tomorrow', sans-serif;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

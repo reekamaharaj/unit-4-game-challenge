@@ -3,3 +3,9 @@
 @tailwind components;
 
 @tailwind utilities;
+
+
+body{
+    font-family: 'Press Start 2P', cursive;
+    font-family: 'Tomorrow', sans-serif; 
+    }
