@@ -11,38 +11,35 @@
 </head>
 
 <body>
-  
   <div class="py-6" style="background: linear-gradient(90deg, #845EC2 0%, #00C9A7 100%)">
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-bold mb-2 text-white">
         Pick your fighter!
       </h2>
       <div class="my-1 px-1 w-full overflow-hidden inline-flex">
-        <img src="assets/images/blob-1.png (1).png" id="blob" width="100">
-        <img src="assets/images/circle-1.png (1).png" id="roude" width="100">
-        <img src="assets/images/square-1.png (1).png" id="squarebob" width="100">
-        <img src="assets/images/triangle-1.png (1).png" id="mrangle" width="100">
+        <img src="assets/images/blob-1.png (1).png" id="blob" class="cursor-pointer" alt="pinkblob" width="100">
+        <img src="assets/images/circle-1.png (1).png" id="roude" class="cursor-pointer" alt="redcircle" width="100">
+        <img src="assets/images/square-1.png (1).png" id="squarebob" class="cursor-pointer" alt="bluesquare" width="100">
+        <img src="assets/images/triangle-1.png (1).png" id="mrangle" class="cursor-pointer" alt="greentriangle" width="100">
       </div>
     </div>
   </div>
 
-  <section class="container mx-auto px-6 p-4">
-    <h2 class="text-4xl font-bold text-gray-800 mb-4">
-      Who do you want to fight first?
+  <section class="container mx-auto px-6 p-4 text-right">
+    <h2 class="text-4xl font-bold text-gray-800 mb-4" id="choose">
     </h2>
     <button class="bg-teal-500 text-white font-bold rounded-full py-2 px-6 shadow-lg uppercase tracking-wider">
       Attack
     </button>
-    <div class="flex items-center flex-wrap mb-2">
+    <div class="flex flex-wrap mb-2">
       <div class="w-full md:w-1/2">
-        <h4 class="text-3xl text-gray-800 font-bold mb-3">Fighting will happen here</h4>
-        <p class="text-gray-600 mb-8">Challanger moves here</p>
+        fight area
       </div>
     </div>
   </section>
 
-  <section style="background-color: #4E8397">
-    <div class="container mx-auto px-6 py-20">
+  <section class="bg-teal-600">
+    <div class="container mx-auto px-6 py-10">
       <h2 class="mb-6 text-4xl font-bold text-white">
         Game Rules
       </h2>
@@ -50,7 +47,7 @@
         rules for playing here 
       </h3>
     </div>
-  </section>
+
 
 </body>
 </html>
