@@ -21,91 +21,136 @@
 // - [ ] Enemy hp goes to 0 then the enemy is taken off the screen and the player chooses another enemy
 // - [ ] when player attacks their attack power will increase by its "base attack power"
 
+// Extra
+// - [ ] Sound effects
+// - [ ] Dynamic health bar
 
+// for sounds added later
+// var audioElementWin = document.createElement("audio");
+// audioElementWin.setAttribute("src", "assets/sounds/#");
+
+// HTML ids
+// #blobContainer - Containers blob picture, name, health
+//     #blob - Blob picture
+//     #health - health value 
+
+// #roudeContainer - Containers roude picture, name, health
+//     #roude - Roude picture
+//     #health - health value 
+
+// #bobContainer - Containers Bob picture, name, health
+//     #bob - bob picture
+//     #health - health value 
+//      
+// #mrAngleContainer - Containers Mr Angle picture, name, health
+//     #mrAngle - Mr. Angle picture
+//     #health - health value 
+
+// #reset - reset button
+// #player - where the player goes
+// #results - there the results go
+// #defeated - defeated will go here
 
 // variables
 var resetButton;
-var fighter = undefined;
-var enemy1 = undefined;
-var enemy2 = undefined;
-var enemy3 = undefined;
+var player = undefined;
+var enemy = [ ];
+var playerPicked = false;
 
-var pink = {
+var blobAtt = {
     name: 'Blob',
     health: 100,
     attack: 3,
     counter: 1,
 };
-var red = {
+var roudeAtt = {
     name: 'Roude',
     health: 120,
     attack: 8,
     counter: 5,
 };
-var blue = {
+var bobAtt = {
     name: 'Squarebob',
     health: 50,
     attack: 5,
     counter: 3,
 };
-var green = {
+var mrAngleAtt = {
     name: 'Mr. Angle',
     health: 200,
     attack: 9,
     counter: 6,
 };
 
-// for sounds added later
-// var audioElementWin = document.createElement("audio");
-// audioElementWin.setAttribute("src", "assets/sounds/#");
-
 //calling functions for game play
 
 $(document).ready(function(){
-    gameStart();
+    pageLoad();
     $("#reset").click(reset);
+
 });
 
 //functions
 
-function gameStart(){
-    $('#choose').text("Who do you want to fight first?");
+function pageLoad(){
     $("#blob").click(blob);
     $("#roude").click(roude);
-    $("#squarebob").click(squarebob);
-    $("#mrangle").click(mrangle);
-    console.log("game started");
+    $("#bob").click(bob);
+    $("#mrAngle").click(mrAngle);
 }
 
 function blob(){
-    fighter = pink;
-    console.log(fighter.name);
-
+    if (playerPicked === false){
+        player = blobAtt;
+        $('#blobContainer').appendTo($('#player'));
+        playerPicked = true;
+        $('#choose').text("Who do you want to fight first?");
+    }
+    else {
+        enemy.push(blobAtt);
+    }
 }
 
 function roude(){
-    fighter = red;
-    console.log(fighter.name);
-
+    if (playerPicked === false){
+        player = roudeAtt;
+        $('#roudeContainer').appendTo($('#player'));
+        playerPicked = true;
+    }
+    else {
+        enemy.push(roudeAtt);
+    }
 }
 
-function squarebob(){
-    fighter = blue;
-    console.log(fighter.name);
+function bob(){
+    if (playerPicked === false){
+        player = bobAtt;
+        $('#bobContainer').appendTo($('#player'));
+        playerPicked = true;
+    }
+    else {
+        enemy.push(bobAtt);
+    }
 }
 
-function mrangle(){
-    fighter = green;
-    console.log(fighter.name);
+function mrAngle(){
+    if (playerPicked === false){
+        player = mrAngleAtt;
+        $('#mrAngleContainer').appendTo($('#player'));
+        playerPicked = true;
+    }
+    else {
+        enemy.push(mrAngleAtt);
+    }
 }
 
 function gameWin() {
     //player wins if they beat all the opponents (3)
+    alert('You win!');
     console.log('game won');
 }
 
 function reset(){
-    fighter = undefined;
-    console.log('rest game');
-
+    player = undefined;
+    location.reload(true);
 }

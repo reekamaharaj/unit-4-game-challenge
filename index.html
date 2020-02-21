@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gray-200">
 
 <head>
   <meta charset="UTF-8">
@@ -12,65 +12,57 @@
 </head>
 
 <body>
-  <div class="py-6" style="background: linear-gradient(90deg, #845EC2 0%, #00C9A7 100%)">
-    <div class="container mx-auto px-6">
-      <h2 class="text-4xl font-bold mb-6 text-white text-center">
-        Pick your fighter!
-      </h2>
+  <div class="p-6" style="background: linear-gradient(90deg, #845EC2 0%, #00C9A7 100%)">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-bold mb-6 text-white text-center" id="choose"> Pick your fighter! </h2>
 
       <div class="my-1 px-5 overflow-hidden flex justify-center">
 
-        <div class="max-w-sm rounded overflow-hidden mx-5 p-4 border-4 border-dashed border-white">
+        <div class="max-w-sm rounded overflow-hidden mx-5 p-4 border-4 border-dashed border-white" id="blobContainer">
           <img src="assets/images/blob-1.png (1).png" id="blob" class="cursor-pointer" alt="pinkblob" width="100">
           <div class="font-bold text-center">Blob</div>
-          <p class="text-white"> Health: 100 </p>
+          <p class="text-white" id="health"> Health: 100 </p>
         </div>
 
-        <div class="max-w-sm rounded overflow-hidden shadow-outer mx-5 p-4 border-4 border-dashed border-white">
+        <div class="max-w-sm rounded overflow-hidden shadow-outer mx-5 p-4 border-4 border-dashed border-white" id="roudeContainer">
           <img src="assets/images/circle-1.png (1).png" id="roude" class="cursor-pointer" alt="redcircle" width="100">
           <div class="font-bold text-center">Roude</div>
           <p class="text-white"> Health: 120 </p>
         </div>
 
-        <div class="max-w-sm rounded overflow-hidden shadow-outer mx-5 p-4 border-4 border-dashed border-white">
-          <img src="assets/images/square-1.png (1).png" id="squarebob" class="cursor-pointer" alt="bluesquare"
-            width="100">
-          <div class="font-bold text-center">Squarebob</div>
-          <p class="text-white"> Health: 50 </p>
-        </div>
+        <div class="max-w-sm rounded overflow-hidden shadow-outer mx-5 p-4 border-4 border-dashed border-white" id="bobContainer">
+            <img src="assets/images/square-1.png (1).png" id="bob" class="cursor-pointer" alt="bluesquare"
+              width="100">
+            <div class="font-bold text-center">Squarebob</div>
+            <p class="text-white"> Health: 50 </p>
+          </div>
 
-        <div class="max-w-sm rounded overflow-hidden shadow-inner mx-5 p-4 border-4 border-dashed border-white">
-          <img src="assets/images/triangle-1.png (1).png" id="mrangle" class="cursor-pointer" alt="greentriangle"
-            width="100">
-          <div class="font-bold text-center">Mr. Angle</div>
-          <p class="text-white"> Health: 200 </p>
+        <div class="max-w-sm rounded overflow-hidden shadow-inner mx-5 p-4 border-4 border-dashed border-white" id="mrAngleContainer">
+            <img src="assets/images/triangle-1.png (1).png" id="mrAngle" class="cursor-pointer" alt="greentriangle"
+              width="100">
+            <div class="font-bold text-center">Mr. Angle</div>
+            <p class="text-white"> Health: 200 </p>
         </div>
-
       </div>
 
       <div class="flex w-full justify-center">
-        <button
-          class="bg-teal-500 hover:bg-teal-700 text-white font-bold rounded-full py-2 px-6 mt-5 shadow-lg uppercase tracking-wider">
-          Reset </button>
+        <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold rounded-full py-2 px-6 mt-5 shadow-lg uppercase tracking-wider" id="reset"> Reset </button>
       </div>
 
     </div>
   </div>
 
-  <section class="container mx-auto px-6 p-4 text-center">
-
-    <h2 class="text-4xl font-bold text-gray-800 mb-4" id="choose"></h2>
-    <div id="enemies">Move enemies here</div>
-
-    <div class="flex flex-wrap mb-2 justify-center">
-      <div class="flex w-full md:w-1/2 justify-center">
-        <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold rounded-full py-2 px-6 shadow-lg uppercase tracking-wider"> Attack </button>
+  <section class="w-full container mx-auto p-6 text-center bg-gray-200">
+    <div class="flex flex-wrap mb-4 justify-center">
+      <div class="flex w-full md:w-1/3 justify-center">
+        <div class="bg-gray-800 text-white p-5 mx-5 w-48" id="player">Player</div>
+        <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold rounded-full py-2 px-6 shadow-lg uppercase tracking-wider mx-5"> Attack </button>
+        <div class="bg-gray-800 text-white p-5" id="enemy">Enemy</div>
       </div>
     </div>
 
-    <div id="arena">Fighting will happen here. Left player fighter. Right Enemy they are fighting</div>
-
-    <div id="defeated">Where the defeated will go</div>
+    <div class="w-full bg-gray-800 text-white p-10" id="results"> Text displayed here to say how much damage was done</div>
+    <div class="py-6" id="defeated">Where the defeated will go</div>
   </section>
 
   <section class="bg-teal-600">
