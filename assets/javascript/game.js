@@ -9,9 +9,9 @@
 // - [ ] player beats the other three characters without losing all their HP
 
 // After fighter is picked...
-// - [ ] move the enemies to the other side of screen
-// - [ ] player will choose which enemy to fight
-// - [ ] enemy will start 'defending' and will have HP displayed
+// - [x] move the enemies to the other side of screen
+// - [x] player will choose which enemy to fight
+// - [x] enemy will start 'defending' and will have HP displayed
 // - [ ] Enemy only has counter attack power - value never changes
 
 //During fight
@@ -29,33 +29,12 @@
 // var audioElementWin = document.createElement("audio");
 // audioElementWin.setAttribute("src", "assets/sounds/#");
 
-// HTML ids
-// #blobContainer - Containers blob picture, name, health
-//     #blob - Blob picture
-//     #health - health value 
-
-// #roudeContainer - Containers roude picture, name, health
-//     #roude - Roude picture
-//     #health - health value 
-
-// #bobContainer - Containers Bob picture, name, health
-//     #bob - bob picture
-//     #health - health value 
-//      
-// #mrAngleContainer - Containers Mr Angle picture, name, health
-//     #mrAngle - Mr. Angle picture
-//     #health - health value 
-
-// #reset - reset button
-// #player - where the player goes
-// #results - there the results go
-// #defeated - defeated will go here
-
 // variables
-var resetButton;
 var player = undefined;
-var enemy = [ ];
 var playerPicked = false;
+var enemy = undefined;
+var enemyPicked = false;
+var defeated= [ ];
 
 var blobAtt = {
     name: 'Blob',
@@ -81,76 +60,84 @@ var mrAngleAtt = {
     attack: 9,
     counter: 6,
 };
+var fighters = [blobAtt, roudeAtt, bobAtt, mrAngleAtt];
 
-//calling functions for game play
-
+// calling functions for game play
 $(document).ready(function(){
     pageLoad();
     $("#reset").click(reset);
-
 });
 
 //functions
 
 function pageLoad(){
-    $("#blob").click(blob);
-    $("#roude").click(roude);
-    $("#bob").click(bob);
-    $("#mrAngle").click(mrAngle);
+    $("#blob").click(() => fighter(blobAtt, '#blobContainer'));
+    $("#roude").click(() => fighter(roudeAtt, '#roudeContainer'));
+    $("#bob").click(() => fighter(bobAtt, '#bobContainer'));
+    $("#mrAngle").click(() => fighter(mrAngleAtt, '#mrAngleContainer'));
 }
 
-function blob(){
+//Arrow function expression notes - [MDN]
+// 
+//ex1: The {} around the statement means that if something needs to be returned then it needs to be stated
+//(one,two,three...,five) => {statements} --Return not implied {}--
+//ex2:
+//(one,two,three...,five) => expression --Return implied--
+//ex3:
+//(onething) => {statements}
+//ex4:
+//onething => {statements}
+//ex5: No parameters needed to initiate the statement
+//() => {statements}
+
+
+//player chooses fighter, fighter will be moved to the fight area
+
+function fighter(attributes, containerId){
     if (playerPicked === false){
-        player = blobAtt;
-        $('#blobContainer').appendTo($('#player'));
+        player = attributes;
+        $(containerId).appendTo($('#player'));
         playerPicked = true;
-        $('#choose').text("Who do you want to fight first?");
-    }
-    else {
-        enemy.push(blobAtt);
+        $('#choose').text("Who do you want to fight?");
+        fighters.splice($.inArray(attributes, fighters),1);
+
+        $("#blob").click(() => opponent(blobAtt, '#blobContainer'));
+        $("#roude").click(() => opponent(roudeAtt, '#roudeContainer'));
+        $("#bob").click(() => opponent(bobAtt, '#bobContainer'));
+        $("#mrAngle").click(() => opponent(mrAngleAtt, '#mrAngleContainer'));
     }
 }
 
-function roude(){
-    if (playerPicked === false){
-        player = roudeAtt;
-        $('#roudeContainer').appendTo($('#player'));
-        playerPicked = true;
+//player chooses enemy to fight, enemy will be moved to the fight area
+function opponent(attributes, containerId){
+    if (enemyPicked === false){
+        enemy = attributes;
+        $(containerId).appendTo($('#enemy'));
+        enemyPicked = true;
+        fighters.splice($.inArray(attributes, fighters),1);
     }
-    else {
-        enemy.push(roudeAtt);
-    }
+
 }
 
-function bob(){
-    if (playerPicked === false){
-        player = bobAtt;
-        $('#bobContainer').appendTo($('#player'));
-        playerPicked = true;
-    }
-    else {
-        enemy.push(bobAtt);
-    }
-}
-
-function mrAngle(){
-    if (playerPicked === false){
-        player = mrAngleAtt;
-        $('#mrAngleContainer').appendTo($('#player'));
-        playerPicked = true;
-    }
-    else {
-        enemy.push(mrAngleAtt);
-    }
-}
-
+//player wins if they beat all the opponents (3)
 function gameWin() {
-    //player wins if they beat all the opponents (3)
     alert('You win!');
     console.log('game won');
 }
 
-function reset(){
-    player = undefined;
-    location.reload(true);
+// #results - there the results go
+function damage() {
+
+}
+
+// #defeated - defeated will go here
+
+function defeated() {
+    fighter = undefined;
+
+}
+
+// #reset - reset button
+function reset() {
+    window.location.reload();
 }
