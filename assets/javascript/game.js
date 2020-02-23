@@ -7,7 +7,6 @@ var player = undefined;
 var playerPicked = false;
 var enemy = undefined;
 var enemyPicked = false;
-var defeated= [ ];
 
 var blobAtt = {
     name: 'Blob',
@@ -48,50 +47,43 @@ $(document).ready(function(){
 //functions
 
 function pageLoad(){
-    $("#blob").click(() => clickSwitch(blobAtt));
-    $("#roude").click(() => clickSwitch(roudeAtt));
-    $("#bob").click(() => clickSwitch(bobAtt));
-    $("#mrAngle").click(() => clickSwitch(mrAngleAtt));
+    $(blobAtt.containerId).click(() => clickSwitch(blobAtt));
+    $(roudeAtt.containerId).click(() => clickSwitch(roudeAtt));
+    $(bobAtt.containerId).click(() => clickSwitch(bobAtt));
+    $(mrAngleAtt.containerId).click(() => clickSwitch(mrAngleAtt));
 }
 
 //player chooses fighter, fighter will be moved to the fight area
 function clickSwitch(attributes){
     if (playerPicked === false){
-        console.log('if clickSwitch' + fighters);
         fighter(attributes);
     }
-    else if (enemyPicked === true){
+    else if (enemyPicked === false){
         opponent(attributes);
     }
-    else {
-        console.log('if opponent', fighters);
-        opponent(attributes);
-    }
+    
 }
 
 function fighter(attributes){
-    console.log('message');
     player = attributes;
     $(player.containerId).appendTo($('#player'));
     playerPicked = true;
     $('#choose').text("Who do you want to fight?");
     fighters.splice($.inArray(attributes, fighters),1);
-    console.log('fighter function',fighters);
+    $(player.containerId).off('click');
 }
 
 //player chooses enemy to fight, enemy will be moved to the fight area
 function opponent(attributes){
-//if (enemyPicked === false){
-if (fighters.length > 0){
-    enemy = attributes;
-    $(enemy.containerId).appendTo($('#enemy'));
-    enemyPicked = true;
-    fighters.splice($.inArray(attributes, fighters),1);
-    theFight();
-    console.log('oppenent function', enemy);
-}
-//}
-    console.log(fighters);
+
+    if (fighters.length > 0){
+        enemy = attributes;
+        $(enemy.containerId).appendTo($('#enemy'));
+        enemyPicked = true;
+        fighters.splice($.inArray(attributes, fighters),1);
+        theFight();
+        $(enemy.containerId).off('click');
+    }
 
 }
 
@@ -101,15 +93,30 @@ function theFight(){
     $("#attack").click(
         function(){
             if (enemy.health > 0){
+                if (player.health >0){
                 enemy.health = (enemy.health - player.attack);
+
                 player.health = (player.health - enemy.counter);
+
+                $('#results').text(player.name + " damaged " + enemy.name + " for " + player.attack + " damage.   " + enemy.name + " damaged " + player.name + " for " + enemy.attack + " damage. " + player.name + " Health: " + player.health + '   ' + enemy.name + " Health: " + enemy.health);
+                //innerHTML if want to add HTML tags
                 player.attack++;
-                console.log(enemy.health);
+                }
+                else {
+                    gameLost();
+                }
             }
 
             if (enemy.health <= 0){
+                enemyPicked = false;
                 $('#choose').text("Who do you want to fight next?");
                 $(enemy.containerId).appendTo($('#defeated'));
+                $('#results').text(enemy.name + " was defeated! Fight someone else!");
+                $('#attack').off('click');
+
+                if (fighters.length === 0){
+                    gameWin();
+                }
             }
         }
     )
@@ -117,22 +124,20 @@ function theFight(){
 
 //player wins if they beat all the opponents (3)
 function gameWin() {
+    $('#choose').text("YOU WON!");
     alert('You win!');
-    console.log('game won');
+}
+
+//player losses
+function gameLost() {
+    $('#choose').text("YOU LOST! :C");
+    alert('You Lose!');
 }
 
 // #reset - reset button
 function reset() {
     window.location.reload();
 }
-
-// TODO: What happens if player.health=0... gameover
-// TODO: Add text to the display for damage done
-// TODO:  Need to update the health when hit
-// TODO: Change up the HTML
-// TODO: unbind click events after a figher is clicked
-// TODO: Win conditions
-
 
 //unbind event listeners or 
 //Arrow function expression
@@ -144,7 +149,7 @@ function reset() {
 // - [x] No healing or recovery for characters
 
 //Win situation
-// - [ ] player beats the other three characters without losing all their HP
+// - [x] player beats the other three characters without losing all their HP
 
 // After fighter is picked...
 // - [x] move the enemies to the other side of screen
