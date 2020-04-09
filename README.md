@@ -11,7 +11,7 @@ User chooses a fighter and then has to beat all the others to win. There are no 
 
 ## Tech Used
 - Tailwind CSS
-- Visual Studios
+- Visual Studio
 - Javascript
 
 ## Role in App Development
